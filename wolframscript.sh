@@ -5,9 +5,10 @@ mathpass_volume="mathpass"
 user="wolframengine" #user=$(docker run -it --rm ${image} id -un | xargs echo)
 mathpass_dir="/home/$user/.WolframEngine/Licensing/"
 
-docker volume inspect ${mathpass_volume} > /dev/null
+docker volume inspect ${mathpass_volume} > /dev/null && docker run -it --rm -v ${mathpass_volume}:${mathpass_dir} ${image} wolframscript -c 'Exit[]' > /dev/null
 if [ $? -ne 0 ]
 then
+docker volume rm ${mathpass_volume} > /dev/null
 docker volume create ${mathpass_volume} > /dev/null
 docker run -it --rm -v ${mathpass_volume}:${mathpass_dir} --user root ${image} chown ${user} -R ${mathpass_dir} > /dev/null
 if [[ -n "${WOLFRAM_USERNAME}" ]] && [[ -n "${WOLFRAM_PASSWORD}" ]]
@@ -21,4 +22,4 @@ else
 docker run -it --rm -v ${mathpass_volume}:${mathpass_dir} ${image} wolframscript -activate
 fi
 fi
-docker run -it --rm -v ${mathpass_volume}:${mathpass_dir} ${image} wolframscript $@
+docker run -it --rm -v ${mathpass_volume}:${mathpass_dir} ${WOLFRAM_DOCKER_ARGS} ${image} wolframscript $@

@@ -17,5 +17,5 @@ before first run set env vars
 `WOLFRAM_PASSWORD`
 
 can also set
-`WOLFRAM_VERSION`
-to be a tag from https://hub.docker.com/r/wolframresearch/wolframengine/tags to choose which version to use
+`WOLFRAM_VERSION` to be a tag from https://hub.docker.com/r/wolframresearch/wolframengine/tags to choose which version to use
+`WOLFRAM_DOCKER_ARGS` to be docker args to use when running like `--gpus=all`
