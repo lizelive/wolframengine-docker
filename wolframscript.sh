@@ -1,5 +1,5 @@
 #!/bin/bash
-tag=${WOLFRAM_VERSION:-"13.0.0-cuda"}
+tag=${WOLFRAM_VERSION:-"latest"}
 image="wolframresearch/wolframengine:${tag}"
 mathpass_volume="mathpass"
 #user=$(docker run -it --rm ${image} id -un | xargs echo)
