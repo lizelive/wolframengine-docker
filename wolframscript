@@ -6,8 +6,6 @@ mathpass_volume="mathpass"
 user="wolframengine"
 mathpass_dir="/home/$user/.WolframEngine/Licensing/"
 
-source mathpass.env
-
 docker volume inspect ${mathpass_volume} > /dev/null
 if [ $? -ne 0 ]
 then
